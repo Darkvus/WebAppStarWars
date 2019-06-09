@@ -22,4 +22,5 @@ from base import views as base
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base.IndexView.as_view(), name="index"),
+    path('apitodb/', base.ApiToDB.as_view(), name='ApitoDb')
 ]

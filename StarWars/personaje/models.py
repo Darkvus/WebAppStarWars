@@ -1,5 +1,7 @@
 from django.db import models
 
+from pelicula.models import Film
+
 
 class Personaje(models.Model):
     nombre = models.CharField(max_length=50)
@@ -13,3 +15,4 @@ class Personaje(models.Model):
                                                       ('N/A', 'N/a')])
     image = models.CharField(max_length=50, blank=True)
     url_API = models.CharField(max_length=50, blank=True)
+    films = models.ForeignKey(Film, on_delete=models.CASCADE, null=True, blank=True)
