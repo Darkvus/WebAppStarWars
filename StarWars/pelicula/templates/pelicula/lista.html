@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+   {% if peliculas %}
+
+       <legend>Star Wars Films</legend>
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        {% blocktrans %}Esta vista permite visualizar todas las peliculas de Star Wars.{% endblocktrans %}
+    </div>
+
+    <br/>
+    <table class="table table-bordered table-striped table-hover datatable">
+        <thead>
+        <tr class="active">
+            <th> Title</th>
+            <th>Director</th>
+            <th>Producer</th>
+            <th>Release Date</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for peli in peliculas %}
+            <tr>
+                <td>
+                    {{ peli.title }}
+                </td>
+                <td>
+                    {{ peli.director }}
+                </td>
+                <td>
+                    {{ peli.producer }}
+                </td>
+                <td>
+                    {{ peli.release_date }}
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-success btn-xs" href="{% url "pelicula:detail" pk=peli.pk %}">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> {% trans 'Detalles' %}
+                        </a>
+
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="alert alert-info">
+                <center>
+                    <h1>
+                        <strong>No existen resultados</strong>
+                    </h1>
+                </center>
+            </div>
+    {% endif %}
+{% endblock %}

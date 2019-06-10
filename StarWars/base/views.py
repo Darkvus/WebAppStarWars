@@ -26,8 +26,7 @@ class ApiToDB(RedirectView):
         # Poblar la base de datos obtendios de la Api
         url_reverse = reverse_lazy('index')
         success_message = 'La ha cargado los datos'
-        flag_peli = False
-        flag_persona = False
+
         Historial(url=request.path).save()
         try:
             if not Film.objects.first():
@@ -40,20 +39,18 @@ class ApiToDB(RedirectView):
                          director=peli['director'], producer=peli['producer'], release_date=peli['release_date'],
                          image='pelicula/img/'+str(peli['title'])+'.jpg', url_API=peli['url']).save()
 
-                flag_peli = True
-
             if not Personaje.objects.first():
                 url_persona = "https://swapi.co/api/people/?search="
                 personajes_list = []
                 personaje_json = []
 
-                personajes_list.append(requests.get(url_persona+'leia'))
                 personajes_list.append(requests.get(url_persona+'Yoda'))
                 personajes_list.append(requests.get(url_persona+'R2 d2'))
                 personajes_list.append(requests.get(url_persona+'bb8'))
                 personajes_list.append(requests.get(url_persona+'luke'))
                 personajes_list.append(requests.get(url_persona+'obi'))
                 personajes_list.append(requests.get(url_persona+'Vader'))
+                personajes_list.append(requests.get(url_persona + 'leia'))
 
                 for api_json in personajes_list:
                     personaje_json.append(api_json.json())
@@ -67,8 +64,7 @@ class ApiToDB(RedirectView):
                               birth_year=persona['results'][0]['birth_year'],
                               gender=persona['results'][0]['gender'],
                               image='personaje/img/'+persona['results'][0]['name']+'.jpg',
-                              url_API=persona['results'][0]['url'])
-
+                              url_API=persona['results'][0]['url']).save()
                     obj.save()
 
                     for peli in persona['results'][0]['films']:
@@ -79,5 +75,6 @@ class ApiToDB(RedirectView):
         except Exception as e:
             logging.error('La carga de datos a fallado')
             messages.error(request, 'La carga de datos a fallado. ¡INTENTALO MÁS TARDE!')
+            print(e)
 
         return HttpResponseRedirect(url_reverse)

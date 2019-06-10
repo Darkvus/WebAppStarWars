@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+   {% if historiales %}
+
+       <legend>Paginas Visitadas</legend>
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        {% blocktrans %}Esta vista permite visualizar todas las paginas visitadas{% endblocktrans %}
+    </div>
+
+    <br/>
+    <table class="table table-bordered table-striped table-hover datatable">
+        <thead>
+        <tr class="active">
+            <th> Pagina </th>
+            <th> Fecha </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for hist in historiales %}
+            <tr>
+                <td>
+                    {{ hist.url }}
+                </td>
+                <td>
+                    {{ hist.date }}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="alert alert-info">
+                <center>
+                    <h1>
+                        <strong>No existen resultados</strong>
+                    </h1>
+                </center>
+            </div>
+    {% endif %}
+{% endblock %}
