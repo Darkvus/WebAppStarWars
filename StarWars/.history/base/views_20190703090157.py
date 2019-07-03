@@ -7,7 +7,7 @@ from django.contrib import messages
 import logging
 
 from historial.models import Historial
-from base.services import LoadData as ld
+from base.services import LoadData
 
 class IndexView(TemplateView):
     template_name = "base/index.html"
@@ -27,7 +27,7 @@ class ApiToDB(RedirectView):
 
         Historial(url=request.path).save()
         try:
-            ld.execute()
+            LoadData.execute()
             messages.success(request, 'La BD ha sido poblada')
 
         except Exception as e:
