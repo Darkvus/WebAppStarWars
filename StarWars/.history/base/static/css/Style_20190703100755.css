@@ -27,7 +27,7 @@ html, body {
 .carousel {
   width:640px;
   height:360px;
-  display: inline-block;
+  display: -webkit-inline-box;
 }
 
 .carousel-inner > .item > img {

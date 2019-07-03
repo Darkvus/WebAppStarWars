@@ -24,12 +24,6 @@ html, body {
   margin: 5px;
 }
 
-.carousel {
-  width:640px;
-  height:360px;
-  display: inline-block;
-}
-
 .carousel-inner > .item > img {
   width:640px;
   height:360px;
