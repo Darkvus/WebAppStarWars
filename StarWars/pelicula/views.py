@@ -33,7 +33,6 @@ class ListViewPeli(ListView):
         else:
             return qs.order_by('episode_id')
 
-
 class DetailViewPeli(DetailView):
     template_name = "pelicula/detalle.html"
     model = Film

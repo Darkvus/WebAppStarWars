@@ -1,45 +1,49 @@
 {% extends "base/base.html" %}
 {% load static %}
 {% block content %}
-    <fieldset>
-       <div class="panel-heading">
-           <center>
-        <legend><h3>Details of the film <strong>{{ film.title }}</strong></h3></legend>
+<fieldset>
+    <div class="panel-heading">
+        <center>
+            <legend>
+                <h3>Details of the film <strong>{{ film.title }}</strong></h3>
+            </legend>
         </center>
-       </div>
-        <br>
-        <div class="panel-body">
+    </div>
+    <br>
+    <div class="panel-body">
 
+        <ul>
+            <li>
+                <h4><strong>Episode: </strong>{{ film.episode_id }}</h4>
+            </li>
+            <li>
+                <h4><strong>Opening Crawl: </strong>{{ film.opening_crawl }}</h4>
+            </li>
+            <li>
+                <h4><strong>Director: </strong>{{ film.director }}</h4>
+            </li>
+            <li>
+                <h4><strong>Producer: </strong>{{ film.producer }}</h4>
+            </li>
+            <li>
+                <h4><strong>Release Date: </strong>{{ film.release_date }}</h4>
+            </li>
+
+            <li>
+                <h4><strong>Personajes: </strong></h4>
+            </li>
             <ul>
-                <li>
-                    <h4><strong>Episode: </strong>{{ film.episode_id }}</h4>
-                </li>
-                <li>
-                    <h4><strong>Opening Crawl: </strong>{{ film.opening_crawl }}</h4>
-                </li>
-                <li>
-                    <h4><strong>Director: </strong>{{ film.director }}</h4>
-                </li>
-                <li>
-                    <h4><strong>Producer: </strong>{{ film.producer }}</h4>
-                </li>
-                <li>
-                    <h4><strong>Release Date: </strong>{{ film.release_date }}</h4>
+                {% for personaje in personajes  %}
+
+                <li><a href="{% url 'detailpers' personaje.id%}">
+                        <h5>{{ personaje.nombre }}</h5>
                 </li>
 
-                <li>
-                    <h4><strong>Personajes: </strong></h4>
-                </li>
-                    <ul>
-                    {% for personaje in personajes  %}            
-                    
-                            <li><a href="{% url 'detailpers' personaje.id%}"><h5>{{ personaje.nombre }}</h5></li>
-                                                   
-                    {% endfor %}
-                    </ul>
-                </li>
+                {% endfor %}
             </ul>
-        </div>
+            </li>
+        </ul>
+    </div>
 
-    </fieldset>
+</fieldset>
 {% endblock %}
