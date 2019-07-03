@@ -16,3 +16,10 @@ class Personaje(models.Model):
     image = models.CharField(max_length=50, blank=True)
     url_API = models.CharField(max_length=50, blank=True)
     films = models.ManyToManyField(Film, null=True)
+
+    class Meta:
+        verbose_name = ("Personaje")
+        verbose_name_plural = ("Personajes")
+
+    def __str__(self):
+        return self.nombre

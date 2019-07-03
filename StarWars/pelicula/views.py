@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView
 
 from historial.models import Historial
 from pelicula.models import Film
+from personaje.models import Personaje
 
 
 class ListViewPeli(ListView):
@@ -40,3 +41,9 @@ class DetailViewPeli(DetailView):
     def dispatch(self, request, *args, **kwargs):
         Historial(url=request.path).save()
         return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['personajes'] = Personaje.objects.filter(films=self.kwargs['pk'])
+        return context
+        

@@ -19,7 +19,7 @@ from django.urls import path, include
 from base import views as base
 from pelicula import urls as pelicula_urls
 from historial import views as historial_view
-
+from personaje import views as personaje_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +27,6 @@ urlpatterns = [
     path('apitodb/', base.ApiToDB.as_view(), name='ApitoDb'),
     path('peliculas/', include((pelicula_urls, 'pelicula'), namespace="pelicula")),
     path('historial/', historial_view.ListViewHistorial.as_view(), name="historial"),
+    path('personaje/detail/<int:pk>/', personaje_view.PersoDetailView.as_view(), name="detailpers"),
 
 ]

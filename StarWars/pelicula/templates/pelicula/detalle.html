@@ -27,6 +27,17 @@
                     <h4><strong>Release Date: </strong>{{ film.release_date }}</h4>
                 </li>
 
+                <li>
+                    <h4><strong>Personajes: </strong></h4>
+                </li>
+                    <ul>
+                    {% for personaje in personajes  %}            
+                    
+                            <li><a href="{% url 'detailpers' personaje.id%}"><h5>{{ personaje.nombre }}</h5></li>
+                                                   
+                    {% endfor %}
+                    </ul>
+                </li>
             </ul>
         </div>
 
