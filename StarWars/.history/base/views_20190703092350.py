@@ -9,7 +9,6 @@ import logging
 from historial.models import Historial
 from base.services import LoadData as ld
 
-
 class IndexView(TemplateView):
     
     def get(self, requests):
@@ -17,6 +16,7 @@ class IndexView(TemplateView):
     
     def dispatch(self, request, *args, **kwargs):
         # Guardamos la página visitada en el historial
+
         Historial(url=request.path).save()
         return super().dispatch(request, *args, **kwargs)
 
