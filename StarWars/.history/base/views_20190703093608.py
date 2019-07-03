@@ -1,6 +1,5 @@
 import requests
 
-from django.shortcuts import render
 from django.views.generic import TemplateView, RedirectView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -13,9 +12,9 @@ from base.services import LoadData as ld
 
 class IndexView(TemplateView):
     
-    def get(self, request):
+    def get(self, requests):
         self.template_name = "base/index.html"
-        return render(request,self.template_name,{})
+        return HttpResponseRedirect(self.template_name)
     
     def dispatch(self, request, *args, **kwargs):
         # Guardamos la página visitada en el historial
