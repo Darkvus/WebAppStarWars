@@ -1,0 +1,3 @@
+
+class LoadDataException (Exception):
+    pass
