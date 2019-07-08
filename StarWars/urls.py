@@ -18,11 +18,15 @@ from django.urls import path, include
 
 from StarWarsApp import urls as url_app
 from StarWarsApp.views.portal import PortalRedirectView
+from StarWarsApp.views.manager import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include((url_app, 'app'), namespace="app")),
     path('', PortalRedirectView.as_view(), name='index'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('manager/', IndexView.as_view(), name='homeAdmin'),
+
 
     # path('apitodb/', portal.ApiToDB.as_view(), name='ApitoDb'),
     # path('peliculas/', include((pelicula_urls, 'pelicula'), namespace="pelicula")),

@@ -7,3 +7,4 @@ migrations/
 venv/
 db.*
 StarWarsEnv/
+.DS_Store

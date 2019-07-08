@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'braces',
+
+    'widget_tweaks',
 
     'StarWarsApp',
 ]
@@ -123,3 +126,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, "templates"),)
+
+LOGIN_REDIRECT_URL = 'homeAdmin'
+LOGOUT_REDIRECT_URL = 'login'
