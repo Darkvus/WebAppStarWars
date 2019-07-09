@@ -15,7 +15,7 @@
                     <li class="active"><a href="/portal">Home</a></li>
                     <li><a href="{% url "app:film" %}">Peliculas</a></li>
                     <li ><a href="{% url "app:personaje" %}">Personajes</a></li>
-                {% elif request.path == "/portal/film/list" %}
+                {% elif request.path == "/portal/film/list/" %}
                     <li><a href="/portal">Home</a></li>
                     <li class="active"><a href="{% url "app:film" %}">Peliculas</a></li>
                     <li ><a href="{% url "app:personaje" %}">Personajes</a></li>
@@ -23,7 +23,7 @@
                     <li ><a href="/portal">Home</a></li>
                     <li class="active"><a href="{% url "app:film" %}">Peliculas</a></li>
                     <li ><a href="{% url "app:personaje" %}">Personajes</a></li>
-                {% elif request.path == "/portal/personaje/list"%}
+                {% elif request.path == "/portal/personajes/list/"%}
                     <li><a href="/portal">Home</a></li>
                     <li><a href="{% url "app:film" %}">Peliculas</a></li>
                     <li class="active"><a href="{% url "app:personaje" %}">Personajes</a></li>

@@ -1,5 +1,3 @@
-
-
 .footer {
   position: fixed;
   left: 0;
@@ -10,10 +8,11 @@
   text-align: left;
 }
 
-html, body {
-    margin: 0px;
-    padding: 50px;
-    background: url("http://digital.bnint.com/filelib/s9/photos/white_wood_4500x3000_lo_res.jpg");
+html,
+body {
+  margin: 0px;
+  padding: 50px;
+  background: url("http://digital.bnint.com/filelib/s9/photos/white_wood_4500x3000_lo_res.jpg");
 }
 
 .item {
@@ -25,14 +24,14 @@ html, body {
 }
 
 .carousel {
-  width:640px;
-  height:360px;
+  width: 640px;
+  height: 360px;
   display: inline-block;
 }
 
-.carousel-inner > .item > img {
-  width:640px;
-  height:360px;
+.carousel-inner>.item>img {
+  width: 640px;
+  height: 360px;
 }
 
 .item img {
@@ -48,16 +47,19 @@ html, body {
     height: 200px;
   }
 }
+
 @media screen and (max-width: 600px) {
   .item img {
     height: 200px;
   }
 }
+
 @media screen and (max-width: 800px) {
   .item img {
     height: 200px;
   }
 }
+
 @media screen and (max-width: 1000px) {
   .item img {
     height: 200px;
