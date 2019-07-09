@@ -3,7 +3,7 @@ from django.urls import path
 from StarWarsApp.views.portal import IndexView
 from StarWarsApp.views.pelicula import ListViewPeli, DetailViewPeli
 from StarWarsApp.views.personaje import PersonajeListView, PersonajeDetailView
-
+from StarWarsApp.helper.utils import ajaxSearch
 
 urlpatterns = [
     path('portal/', IndexView.as_view(), name="portal"),
@@ -13,5 +13,5 @@ urlpatterns = [
     path('portal/personajes/list/', PersonajeListView.as_view(), name='personaje'),
     path('portal/personajes/detail/<int:pk>/',
          PersonajeDetailView.as_view(), name='personaje_detail'),
-
+    path('search/', ajaxSearch),
 ]

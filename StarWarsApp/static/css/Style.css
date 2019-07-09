@@ -65,3 +65,8 @@ body {
     height: 200px;
   }
 }
+
+.position_nav {
+  z-index: 999;
+  position: relative;
+}
