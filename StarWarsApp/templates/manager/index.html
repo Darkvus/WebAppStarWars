@@ -20,6 +20,10 @@
 
   <!-- Custom styles for this template-->
   <link href= {% static 'css/manager/sb-admin.css' %} rel="stylesheet">
+  <link href={% static 'css/toastr.css' %} rel="stylesheet">
+  <link href={% static 'css/toastr.min.css' %} rel="stylesheet">
+
+
 
 </head>
 
@@ -76,9 +80,13 @@
         </ol>
 
         <div class="row">
-            
-            <div class="offset-md-4 col-md-4 "> <button type="button" class="btn btn-success btn-block">Load Data</button> </div>
-            
+
+            <div class="offset-md-4 col-md-4 "> <a href="#" id="load-data-button" class="btn btn-success btn-block">Load Data</a> </div>
+            {% if messages %}
+              {% for message in messages %}
+                <script>   toastr.{{ message.tags }}("{{ message }}"); </script>
+              {% endfor %}
+            {% endif %}
         </div>
 
         <br>
@@ -104,7 +112,14 @@
                   </tr>
                 </tfoot>
                 <tbody>
-           
+                  <tr>
+                    <td> Personajes </td>
+                    <td id="id_personajes"> {{ personajes }} </td>
+                  </tr>
+                  <tr>    
+                    <td> Peliculas </td>
+                    <td id="id_peliculas"> {{ peliculas }} </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -168,8 +183,27 @@
   <!-- Custom scripts for all pages-->
   <script src={% static 'js/sb-admin.min.js' %}></script>
 
-  
+  <script src="{% static 'js/toastr.min.js' %}"></script>
 
+  <script>
+  $('#load-data-button').click(function(){
+    $.ajax({
+      method: 'POST',
+      url: "{% url 'apiToDB' %}",
+      data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function(res) {
+        toastr.success(res.message);
+        $('#id_personajes').load(res.context.personajes);
+        $('#id_peliculas').load(res.context.peliculas);        
+      },
+      error: function(res) {
+        toastr.error(res.responseJSON.message);
+      }
+    });
+  });
+  </script>
 </body>
 
 </html>

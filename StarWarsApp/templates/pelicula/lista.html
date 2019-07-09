@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'portal/portal.html' %}
 {% load static %}
 {% load i18n %}
 {% block content %}
@@ -38,7 +38,7 @@
                 </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
-                        <a class="btn btn-success btn-xs" href="{% url "pelicula:detail" pk=peli.pk %}">
+                        <a class="btn btn-success btn-xs" href="{% url "app:film_detail" pk=peli.pk %}">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> {% trans 'Detalles' %}
                         </a>
 

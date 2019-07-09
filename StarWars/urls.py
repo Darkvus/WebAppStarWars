@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from StarWarsApp import urls as url_app
 from StarWarsApp.views.portal import PortalRedirectView
-from StarWarsApp.views.manager import IndexView
+from StarWarsApp.views.manager import IndexView, DataLoad
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +26,8 @@ urlpatterns = [
     path('', PortalRedirectView.as_view(), name='index'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('manager/', IndexView.as_view(), name='homeAdmin'),
+    path('manager/api_to_db', DataLoad.as_view(), name='apiToDB'),
+
 
 
     # path('apitodb/', portal.ApiToDB.as_view(), name='ApitoDb'),

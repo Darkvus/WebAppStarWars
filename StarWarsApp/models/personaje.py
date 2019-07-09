@@ -1,10 +1,10 @@
 from django.db import models
 
-from .pelicula import Pelicula
+from StarWarsApp.models.pelicula import Pelicula
 
 
 class Personaje(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, unique=True)
     height = models.CharField(max_length=7)
     mass = models.CharField(max_length=10)
     hair_color = models.CharField(max_length=10)
