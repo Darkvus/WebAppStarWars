@@ -1,15 +1,17 @@
-{% extends "base/base.html" %}
+{% extends "portal/portal.html" %}
 {% load static %}
 {% block content %}
+<br>
     <fieldset>
-       <div class="panel-heading">
+    <div class="panel panel-info">
+       <div class="panel-heading ">
            <center>
         <legend><h3>Details of the Character <strong>{{  personaje.nombre }}</strong></h3></legend>
         </center>
        </div>
         <br>
         <div class="panel-body">
-
+            
             <ul>
                 <li>
                     <h4><strong>Height: </strong>{{  personaje.height }}</h4>
@@ -29,6 +31,6 @@
 
             </ul>
         </div>
-
+    </div>
     </fieldset>
 {% endblock %}

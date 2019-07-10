@@ -1,11 +1,12 @@
-{% extends "base/base.html" %}
+{% extends "portal/portal.html" %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <fieldset>
     <div class="panel-heading">
         <center>
             <legend>
-                <h3>Details of the film <strong>{{ film.title }}</strong></h3>
+                <h3>Details of the film <strong>{{ pelicula.title }}</strong></h3>
             </legend>
         </center>
     </div>
@@ -14,34 +15,50 @@
 
         <ul>
             <li>
-                <h4><strong>Episode: </strong>{{ film.episode_id }}</h4>
+                <h4><strong>Episode: </strong>{{ pelicula.episode_id }}</h4>
             </li>
             <li>
-                <h4><strong>Opening Crawl: </strong>{{ film.opening_crawl }}</h4>
+                <h4><strong>Opening Crawl: </strong>{{ pelicula.opening_crawl }}</h4>
             </li>
             <li>
-                <h4><strong>Director: </strong>{{ film.director }}</h4>
+                <h4><strong>Director: </strong>{{ pelicula.director }}</h4>
             </li>
             <li>
-                <h4><strong>Producer: </strong>{{ film.producer }}</h4>
+                <h4><strong>Producer: </strong>{{ pelicula.producer }}</h4>
             </li>
             <li>
-                <h4><strong>Release Date: </strong>{{ film.release_date }}</h4>
+                <h4><strong>Release Date: </strong>{{ pelicula.release_date }}</h4>
             </li>
 
             <li>
                 <h4><strong>Personajes: </strong></h4>
             </li>
-            <ul>
-                {% for personaje in personajes  %}
+            <table id="table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr class="active">
+                        <th> Name</th>
+                        <th>Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for personaje in personajes  %}
+                    <tr>
+                        <td> {{ personaje.nombre }} </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="...">
+                                <a class="btn btn-success btn-xs" href={% url 'app:character_detail' personaje.id%}>
+                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                    {% trans 'Detail' %}
+                                </a>
 
-                <li><a href="{% url 'detailpers' personaje.id%}">
-                        <h5>{{ personaje.nombre }}</h5>
-                </li>
-
-                {% endfor %}
-            </ul>
-            </li>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </ul>
+        </li>
         </ul>
     </div>
 

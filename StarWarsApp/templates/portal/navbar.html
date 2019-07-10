@@ -27,15 +27,22 @@
                     <li><a href="/portal">Home</a></li>
                     <li><a href="{% url "app:film" %}">Peliculas</a></li>
                     <li class="active"><a href="{% url "app:personaje" %}">Personajes</a></li>
+                {% else %}
+                    <li ><a href="/portal">Home</a></li>
+                    <li ><a href="{% url "app:film" %}">Peliculas</a></li>
+                    <li ><a href="{% url "app:personaje" %}">Personajes</a></li>
 
                 {% endif %}
             </ul>
-            <ul class="nav navbar-nav navbar-right position-nav">
+            <ul class="nav navbar-nav navbar-right">
                 <div id="search-container">
-                    <form action="{% url "app:film" %}">
+                    <form action="{% url "app:search" %}">
                         <input id="id_search" type="text" placeholder="Search" name="search">
                         <button type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </form> 
+
+                    <ul id="pelicula-lista">
+                     </ul>
                 </div>
             </ul>
         </div>

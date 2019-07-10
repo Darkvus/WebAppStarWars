@@ -44,5 +44,5 @@ class DetailViewPeli(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['personajes'] = Personaje.objects.filter(
-            films=self.kwargs['pk'])
+            peliculas=self.kwargs['pk'])
         return context

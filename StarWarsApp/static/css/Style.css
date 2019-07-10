@@ -6,13 +6,16 @@
   background-color: #979595;
   color: white;
   text-align: left;
+  z-index: 9000;
 }
 
-html,
 body {
   margin: 0px;
   padding: 50px;
-  background: url("http://digital.bnint.com/filelib/s9/photos/white_wood_4500x3000_lo_res.jpg");
+  background: url("https://www.gijondefarra.com/wp-content/uploads/background-opera-speeddials-community-web-simple-backgrounds-simple-1064300555.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .item {
