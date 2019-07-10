@@ -11,7 +11,7 @@ class ListViewPeli(ListView):
     context_object_name = "peliculas"
 
     def dispatch(self, request, *args, **kwargs):
-        Historial(url=request.path).save()
+        Historial(url=request.path, category="Film List").save()
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -38,7 +38,8 @@ class DetailViewPeli(DetailView):
     model = Pelicula
 
     def dispatch(self, request, *args, **kwargs):
-        Historial(url=request.path).save()
+        film = Pelicula.objects.get(id=self.kwargs['pk'])
+        Historial(url=request.path, category=film.title).save()
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

@@ -20,7 +20,7 @@ class IndexView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         # Guardamos la página visitada en el historial
-        Historial(url=request.path).save()
+        Historial(url=request.path, category="Home").save()
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -32,6 +32,11 @@ class PortalRedirectView(RedirectView):
 class SearchView(ListView):
     template_name = 'portal/search.html'
     model = Personaje
+
+    def dispatch(self, request, *args, **kwargs):
+        # Guardamos la página visitada en el historial
+        Historial(url=request.path, category="Search").save()
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

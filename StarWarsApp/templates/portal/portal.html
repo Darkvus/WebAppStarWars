@@ -28,7 +28,13 @@
     <body>
         {% include "portal/navbar.html" %}
 
-
+        {% if request.path != "/portal/" %}
+            
+                <div id="bread" class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/portal/">Home </a>
+                </div>
+           
+        {% endif %}
         <div class="container">
             {% block content %}
             {% endblock %}
@@ -37,16 +43,35 @@
         {% include "portal/footer.html" %}
 
         {% block js %}
-        <script src="{% static "js/jquery.min.js" %}"></script>
-        <script src="{% static "js/bootstrap.min.js" %}"></script>
-        <script src="{% static "js/jquery.dataTables.min.js" %}"></script>
-        <script src="{% static "js/dataTables.bootstrap.min.js" %}"></script>
-        <script src="{% static "js/function.js" %}"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+            <script src="{% static "js/jquery.min.js" %}"></script>
+            <script src="{% static "js/bootstrap.min.js" %}"></script>
+            <script src="{% static "js/jquery.dataTables.min.js" %}"></script>
+            <script src="{% static "js/dataTables.bootstrap.min.js" %}"></script>
+            <script src="{% static "js/function.js" %}"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         {% endblock js %}
 
 
         {% block scripts %}
+            <script>
+                $(document).ready(function () {
+                    var cadena;
+                    var url = '{{ request.path }}';
+                    switch(url){
+                        case '/portal/film/list/':
+                            cadena = 'Peliculas'
+                            break;
+                        case '/portal/personajes/list/':
+                            cadena = 'Personajes'
+                            break;
+                        default:
+                            
+                            break;
+                    }
+
+                    $('#bread').append('<li  class="breadcrumb-item"><a href= "{{ request.path }}" %}> '+cadena+'</a></li>')
+                });
+            </script>
         {% endblock %}
     </body>
 </html>

@@ -15,4 +15,5 @@ urlpatterns = [
          PersonajeDetailView.as_view(), name='character_detail'),
     path('search/', ajaxSearch),
     path('portal/search', SearchView.as_view(), name='search'),
+
 ]

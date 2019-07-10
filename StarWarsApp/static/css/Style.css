@@ -16,6 +16,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  position: relative;
 }
 
 .item {
@@ -27,8 +28,8 @@ body {
 }
 
 .carousel {
-  width: 640px;
-  height: 360px;
+  width: auto;
+  height: auto;
   display: inline-block;
 }
 

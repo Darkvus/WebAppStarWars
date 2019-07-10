@@ -11,7 +11,7 @@ class PersonajeListView (ListView):
     context_object_name = "personajes"
 
     def dispatch(self, request, *args, **kwargs):
-        Historial(url=request.path).save()
+        Historial(url=request.path, category="Characters List").save()
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -23,3 +23,9 @@ class PersonajeListView (ListView):
 class PersonajeDetailView(DetailView):
     model = Personaje
     template_name = 'personaje/detalle.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Guardamos la página visitada en el historial
+        personaje = Personaje.objects.get(id=self.kwargs['pk'])
+        Historial(url=request.path, category=personaje.nombre).save()
+        return super().dispatch(request, *args, **kwargs)
