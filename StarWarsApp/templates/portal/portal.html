@@ -36,15 +36,25 @@
            
         {% endif %}
         <div class="container">
-            <div class="col col-sm-10">
-                {% block content %}
-                {% endblock %}
-            </div>
-            <div class="col col-sm-2">
-                <div class="panel panel-info">
-                    <div class="panel panel-heading"> Historial List: </div>
-                    <div class="panel panel-body"> </div>
-                    
+            <div class="row">
+                <div class="col col-sm-10">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                <div class="col col-sm-2 col-md-offset-9" style="position: fixed">
+                    <div class="panel panel-info">
+                        <div class="panel panel-heading"> Historial List: </div>
+                        <div class="panel panel-body"> 
+                            <ol>
+                            {% for breadcrum in breadcrumb_list  %}
+                            
+                                <li><a href="{{breadcrum.url}}"> {{ breadcrum.category }} </a></li>
+
+                            {% endfor %}
+                            </ol>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,27 @@
 from StarWarsApp.models.pelicula import Pelicula
 from StarWarsApp.models.personaje import Personaje
+from StarWarsApp.models.historial import Historial
 import json
 from django.http import HttpResponse
+
+
+def getBreadcrum():
+    return Historial.objects.all().order_by('-id')[:10]
+
+
+def deleteRepeatElements(x):
+    return list(dict.fromkeys(x))
+
+
+def checkRegistry(category):
+    flag = False
+    registros = Historial.objects.all().order_by('-id')[:10]
+
+    for reg in registros:
+        if reg.category == category:
+            flag = True
+            break
+    return flag
 
 
 def ajaxSearch(request):
