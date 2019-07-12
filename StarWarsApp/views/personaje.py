@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from StarWarsApp.models.personaje import Personaje
 from StarWarsApp.models.historial import Historial
-from StarWarsApp.helper.utils import checkRegistry
+from StarWarsApp.helper.utils import sortedReverseDictionary, breadcrumSession
 
 
 class PersonajeListView (ListView):
@@ -12,9 +12,7 @@ class PersonajeListView (ListView):
     context_object_name = "personajes"
 
     def dispatch(self, request, *args, **kwargs):
-        registro = checkRegistry("Characters List")
-        if not registro:
-            Historial(url=request.path, category="Characters List").save()
+        breadcrumSession(request, 'List of Character')
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -24,7 +22,8 @@ class PersonajeListView (ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["breadcrumb_list"] = Historial.objects.all().order_by('-id')[:10]
+        items = sortedReverseDictionary(self.request.session['breadcrum'])
+        context["breadcrumb_list"] = items
         return context
 
 
@@ -35,12 +34,12 @@ class PersonajeDetailView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         # Guardamos la página visitada en el historial
         personaje = Personaje.objects.get(id=self.kwargs['pk'])
-        registro = checkRegistry(personaje.nombre)
-        if not registro:
-            Historial(url=request.path, category=personaje.nombre).save()
+        breadcrumSession(request, personaje.nombre)
+
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["breadcrumb_list"] = Historial.objects.all().order_by('-id')[:10]
+        items = sortedReverseDictionary(self.request.session['breadcrum'])
+        context["breadcrumb_list"] = items
         return context

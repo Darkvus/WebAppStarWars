@@ -41,14 +41,14 @@
                     {% block content %}
                     {% endblock %}
                 </div>
-                <div class="col col-sm-2 col-md-offset-9" style="position: fixed">
+                <div class="col col-xs-3 col-sm-offset-8" style="position: fixed">
                     <div class="panel panel-info">
                         <div class="panel panel-heading"> Historial List: </div>
                         <div class="panel panel-body"> 
                             <ol>
-                            {% for breadcrum in breadcrumb_list  %}
+                            {% for url, category in breadcrumb_list.items  %}
                             
-                                <li><a href="{{breadcrum.url}}"> {{ breadcrum.category }} </a></li>
+                                <li><a href="{{url}}"> {{ category }} </a></li>
 
                             {% endfor %}
                             </ol>
@@ -79,6 +79,9 @@
                     switch(url){
                         case '/portal/film/list/':
                             cadena = 'Peliculas'
+                            break;
+                        case '/portal/personajes/list/':
+                            cadena = 'Personajes'
                             break;
                         case '/portal/personajes/list/':
                             cadena = 'Personajes'

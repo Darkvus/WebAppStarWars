@@ -4,7 +4,7 @@ from StarWarsApp.models.historial import Historial
 from StarWarsApp.models.pelicula import Pelicula
 from StarWarsApp.models.personaje import Personaje
 
-from StarWarsApp.helper.utils import checkRegistry
+from StarWarsApp.helper.utils import sortedReverseDictionary, breadcrumSession
 
 
 class ListViewPeli(ListView):
@@ -13,10 +13,7 @@ class ListViewPeli(ListView):
     context_object_name = "peliculas"
 
     def dispatch(self, request, *args, **kwargs):
-        registro = checkRegistry("Film List")
-
-        if not registro:
-            Historial(url=request.path, category="Film List").save()
+        breadcrumSession(request, 'List of Film')
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -27,8 +24,8 @@ class ListViewPeli(ListView):
         else:
             context["Search"] = False
 
-        context["breadcrumb_list"] = Historial.objects.all().order_by(
-            '-id')[:10]
+        items = sortedReverseDictionary(self.request.session['breadcrum'])
+        context["breadcrumb_list"] = items
         return context
 
     def get_queryset(self):
@@ -46,17 +43,13 @@ class DetailViewPeli(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         film = Pelicula.objects.get(id=self.kwargs['pk'])
-        registro = checkRegistry(film.title)
-
-        if not registro:
-
-            Historial(url=request.path, category=film.title).save()
+        breadcrumSession(request, film.title)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['personajes'] = Personaje.objects.filter(
             peliculas=self.kwargs['pk'])
-        context["breadcrumb_list"] = Historial.objects.all().order_by(
-            '-id')[:10]
+        items = sortedReverseDictionary(self.request.session['breadcrum'])
+        context["breadcrumb_list"] = items
         return context

@@ -10,7 +10,7 @@ import logging
 from StarWarsApp.models.historial import Historial
 from StarWarsApp.models.personaje import Personaje
 from StarWarsApp.models.pelicula import Pelicula
-from StarWarsApp.helper.utils import checkRegistry
+from StarWarsApp.helper.utils import sortedReverseDictionary, breadcrumSession
 
 
 class IndexView(TemplateView):
@@ -18,15 +18,16 @@ class IndexView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         # Guardamos la página visitada en el historial
-        registro = checkRegistry("Home")
-
-        if not registro:
-            Historial(url=request.path, category="Home").save()
-        return super().dispatch(request, *args, **kwargs)
+        try:
+            breadcrumSession(request, 'Home')
+            return super().dispatch(request, *args, **kwargs)
+        except Exception as e:
+            print(e)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["breadcrumb_list"] = Historial.objects.all().order_by('-id')[:10]
+        items = sortedReverseDictionary(self.request.session['breadcrum'])
+        context["breadcrumb_list"] = items
         return context
 
 
@@ -41,12 +42,10 @@ class SearchView(ListView):
 
     def dispatch(self, request, *args, **kwargs):
         # Guardamos la página visitada en el historial
-        registro = checkRegistry(
-            "Search to "+request.environ["QUERY_STRING"].split("=")[-1])
 
-        if not registro:
-            Historial(url=request.environ["PATH_INFO"]+"?" +
-                      request.environ["QUERY_STRING"], category="Search to "+request.environ["QUERY_STRING"].split("=")[-1]).save()
+        breadcrumSession(request,  "Search to " +
+                                   request.environ["QUERY_STRING"].split("=")[-1])
+
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -56,5 +55,7 @@ class SearchView(ListView):
 
         context["filtro_personaje"] = Personaje.objects.filter(
             nombre__contains=self.request.GET['search']).order_by('nombre')
-        context["breadcrumb_list"] = Historial.objects.all().order_by('-id')[:10]
+        items = sortedReverseDictionary(self.request.session['breadcrum'])
+        context["breadcrumb_list"] = items
+
         return context

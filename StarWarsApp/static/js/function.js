@@ -1,7 +1,7 @@
 // Fichero js personalizado.
 $(document).ready(function () {
    $('.table').DataTable({
-      "lengthMenu": [3, 10, 25, 50, 75, 100]
+      "lengthMenu": [5, 10, 25, 50, 75, 100]
    });
 });
 
