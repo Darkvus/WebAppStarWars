@@ -81,3 +81,16 @@ body {
     padding-right: 100px;
   }
 }
+
+
+#ui-id-1 {
+  max-height: 200px;
+  overflow-y: scroll;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+}
+
+
+
+</style>
