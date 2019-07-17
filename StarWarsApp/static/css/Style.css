@@ -85,6 +85,8 @@ body {
 
 #ui-id-1 {
   max-height: 200px;
+  position: fixed;
+  width: 180px;
   overflow-y: scroll;
   /* prevent horizontal scrollbar */
   overflow-x: hidden;
